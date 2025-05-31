@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://b80raboe3vnq8"]
+
+[ext_resource type="ArrayMesh" uid="uid://c1ekrab78imdv" path="res://Blender/lantaarnpaal.tres" id="1_6fl13"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_djj6c"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_djj6c"]
+height = 16.7669
+
+[node name="Lantaarnpaal" type="MeshInstance3D"]
+mesh = ExtResource("1_6fl13")
+skeleton = NodePath("")
+
+[node name="Lichaam" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0609694, 0)
+physics_material_override = SubResource("PhysicsMaterial_djj6c")
+can_sleep = false
+
+[node name="Botslaag" type="CollisionShape3D" parent="Lichaam"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.59195, 0)
+shape = SubResource("CylinderShape3D_djj6c")

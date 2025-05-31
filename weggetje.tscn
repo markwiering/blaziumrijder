@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=4 uid="uid://c5j4ib5bd8x4d"]
+
+[ext_resource type="Texture2D" uid="uid://dmy60xn8pfd7j" path="res://Blender/weggetje_onverhardeWeg.jpg" id="1_wiuw8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hl2t4"]
+resource_name = "Weggetje"
+cull_mode = 2
+albedo_texture = ExtResource("1_wiuw8")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_l37q2"]
+_surfaces = [{
+"aabb": AABB(-1.21022, -0.148592, -3.93341, 2.42044, 0.297184, 7.86682),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAwACAAEAAAAEAAEAAwAFAAIABQAAAAIABgAEAAAABQAGAAAABwABAAQABwADAAEABgAHAAQABQADAAcABQAHAAYA"),
+"name": "Weggetje",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("////////AAAAAP//AAAAAAAA/////wAAAAAAAAAAAAD/////AAAAAAAAAAD//wAA//8AAP//AAD//wAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_276m2"]
+resource_name = "weggetje_Cube_001"
+_surfaces = [{
+"aabb": AABB(-1.21022, -0.148592, -3.93341, 2.42044, 0.297184, 7.86682),
+"attribute_data": PackedByteArray("nH3HfxLPUbucfVG7Es/Hf7qlbfucfdz2uqXc9px9bfv//zV7nH2kdv//pHacfTV7nH1RuxLP3Pacfdz2Es9Ru///x3+cfTV7//81e5x9x3+6pf//nH1t+7qlbfucff7/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_hl2t4"),
+"name": "Weggetje",
+"primitive": 3,
+"uv_scale": Vector4(3.3451, 2.1577, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("////////VNUAAP//AABU1QAA/////1TV/////wAAVNX//wAAAAAAgAAA//8AAACA/////wAAAIAAAAAAAAAAgAAAAAAAAP+/AAD//////78AAP//AAD/vwAAAAD///+/AAAAAP//VNX//wAAAABU1f//AAD//1TVAAAAAAAAVNX//wAA////v/////8AAP+//////////7///wAAAAD/vwAAAAD///////////////8AAP//////////AAD/////VFVUVVRVVFVUVVRVVFVUVf9/////f////3////9/////fwAA/38AAP9/AAD/fwAAVNWqKlTVqipU1aoqVNWqKv9/////f////3////9/////f////3/+//9/////f/7/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_l37q2")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mifjg"]
+size = Vector3(2.37094, 0.281372, 7.88159)
+
+[node name="Weggetje" type="MeshInstance3D"]
+mesh = SubResource("ArrayMesh_276m2")
+skeleton = NodePath("")
+metadata/_edit_group_ = true
+
+[node name="Lichaam" type="StaticBody3D" parent="."]
+metadata/_edit_group_ = true
+
+[node name="Botslaag" type="CollisionShape3D" parent="Lichaam"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00892639, 0.0199585, -0.00842285)
+shape = SubResource("BoxShape3D_mifjg")
+metadata/_edit_group_ = true

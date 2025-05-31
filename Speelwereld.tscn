@@ -1,0 +1,324 @@
+[gd_scene load_steps=27 format=3 uid="uid://nhieqdjjwnw3"]
+
+[ext_resource type="Script" uid="uid://cawskvwgwmjo6" path="res://speelwereld.gd" id="1_2m2jo"]
+[ext_resource type="PackedScene" uid="uid://d1ifsliytbt84" path="res://Hotrod.tscn" id="1_qhsfg"]
+[ext_resource type="Texture2D" uid="uid://dhskryt70sk2g" path="res://Blender/sneeuw.hdr" id="2_pivx6"]
+[ext_resource type="Texture2D" uid="uid://d3tyyt627wde2" path="res://Tekstuur/grond.jpg" id="3_2m2jo"]
+[ext_resource type="Script" uid="uid://bcu8nnikoyq2n" path="res://Kamera.gd" id="3_xm0ay"]
+[ext_resource type="PackedScene" uid="uid://bymn5tnakmrat" path="res://Blender/thisvideogameisstillinprogress.glb" id="6_p7vk1"]
+[ext_resource type="PackedScene" uid="uid://dc4vn6ednk82w" path="res://lantaarnpaal_beweegbaar.tscn" id="8_x3bib"]
+[ext_resource type="PackedScene" uid="uid://dwmvleq23q750" path="res://bankje_beweegbaar.tscn" id="9_5uyip"]
+[ext_resource type="PackedScene" uid="uid://17musnf4fx8c" path="res://straat.tscn" id="9_x3bib"]
+[ext_resource type="PackedScene" uid="uid://byfuhtkvq4f7t" path="res://prullenbak_beweegbaar.tscn" id="10_3rd0m"]
+[ext_resource type="PackedScene" uid="uid://y4km1fiu4syp" path="res://huis.tscn" id="10_phpkt"]
+[ext_resource type="PackedScene" uid="uid://c70mahijwgbvc" path="res://lantaarntje_beweegbaar.tscn" id="11_3v7j5"]
+[ext_resource type="PackedScene" uid="uid://c3rtqtggc00jf" path="res://ufo.tscn" id="11_p7vk1"]
+[ext_resource type="PackedScene" uid="uid://c5j4ib5bd8x4d" path="res://weggetje.tscn" id="11_p47ut"]
+[ext_resource type="PackedScene" uid="uid://dcmeapvbxdws3" path="res://sneeuwboom.tscn" id="12_iv21f"]
+[ext_resource type="PackedScene" uid="uid://cvpsejuk8efk4" path="res://onshuis.tscn" id="16_orkm3"]
+[ext_resource type="PackedScene" uid="uid://kydqkfkw4ivs" path="res://bocht_inclusief.tscn" id="17_pon8q"]
+[ext_resource type="AudioStream" uid="uid://ccm777gcamfnw" path="res://Geluiden/muziek.ogg" id="18_p7vk1"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_k4phx"]
+panorama = ExtResource("2_pivx6")
+
+[sub_resource type="Sky" id="Sky_mng87"]
+sky_material = SubResource("PanoramaSkyMaterial_k4phx")
+
+[sub_resource type="Environment" id="Environment_qhsfg"]
+background_mode = 2
+sky = SubResource("Sky_mng87")
+sky_rotation = Vector3(0, 1.5708, 0)
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_sky_contribution = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_ssawp"]
+
+[sub_resource type="Skin" id="Skin_xm0ay"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ssawp"]
+albedo_color = Color(0.282932, 0.442991, 0.565309, 1)
+albedo_texture = ExtResource("3_2m2jo")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xm0ay"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m3kip"]
+size = Vector3(9.78436, 2.68402, 1.61304)
+
+[node name="Speelwereld" type="Node3D" node_paths=PackedStringArray("Volg_Kamera", "Vaste_Kamera", "Kamera_Achteruit")]
+script = ExtResource("1_2m2jo")
+Volg_Kamera = NodePath("AutoKamera")
+Vaste_Kamera = NodePath("Hotrod/Kamera")
+Kamera_Achteruit = NodePath("Hotrod/AchteruitKamera")
+
+[node name="Omgeving" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_qhsfg")
+
+[node name="AutoKamera" type="Camera3D" parent="."]
+transform = Transform3D(-0.999878, 0.00532217, -0.0146855, 0, 0.940164, 0.340724, 0.0156202, 0.340683, -0.940049, -0.163358, -5.8207, -90.7857)
+script = ExtResource("3_xm0ay")
+follow_this_path = NodePath("../Hotrod")
+target_distance = 7.0
+target_height = 3.0
+
+[node name="Hotrod" parent="." instance=ExtResource("1_qhsfg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10.6813, -82.1115)
+turbo_constante = 500
+
+[node name="Kamera" type="Camera3D" parent="Hotrod"]
+transform = Transform3D(-1, 3.55271e-15, 8.74228e-08, 3.64063e-08, 0.909163, 0.416439, -7.94816e-08, 0.416439, -0.909163, 0.197997, 3.47302, -6.05228)
+
+[node name="AchteruitKamera" type="Camera3D" parent="Hotrod"]
+transform = Transform3D(1, 2.81438e-08, 1.54289e-08, -3.11378e-08, 0.967267, 0.253758, -7.78228e-09, -0.253758, 0.967267, -0.00781366, 3.19779, 7.62784)
+
+[node name="Platform" type="MeshInstance3D" parent="."]
+transform = Transform3D(100, 0, 0, 0, 10, 0, 0, 0, 100, 2.8343, -21.0257, 0)
+mesh = SubResource("BoxMesh_ssawp")
+skin = SubResource("Skin_xm0ay")
+surface_material_override/0 = SubResource("StandardMaterial3D_ssawp")
+metadata/_edit_group_ = true
+
+[node name="Platformskelet" type="StaticBody3D" parent="Platform"]
+
+[node name="Botslaag" type="CollisionShape3D" parent="Platform/Platformskelet"]
+shape = SubResource("BoxShape3D_xm0ay")
+
+[node name="Platform3" type="MeshInstance3D" parent="."]
+transform = Transform3D(100, 0, 0, 0, 10, 0, 0, 0, 100, 3.06, -2.71266, 196.465)
+mesh = SubResource("BoxMesh_ssawp")
+skin = SubResource("Skin_xm0ay")
+surface_material_override/0 = SubResource("StandardMaterial3D_ssawp")
+metadata/_edit_group_ = true
+
+[node name="Platformskelet" type="StaticBody3D" parent="Platform3"]
+
+[node name="Botslaag" type="CollisionShape3D" parent="Platform3/Platformskelet"]
+shape = SubResource("BoxShape3D_xm0ay")
+
+[node name="Platform4" type="MeshInstance3D" parent="."]
+transform = Transform3D(100, 0, 0, 0, 10, 0, 0, 0, 100, 103.083, -2.71266, 194.051)
+mesh = SubResource("BoxMesh_ssawp")
+skin = SubResource("Skin_xm0ay")
+surface_material_override/0 = SubResource("StandardMaterial3D_ssawp")
+metadata/_edit_group_ = true
+
+[node name="Platformskelet" type="StaticBody3D" parent="Platform4"]
+
+[node name="Botslaag" type="CollisionShape3D" parent="Platform4/Platformskelet"]
+shape = SubResource("BoxShape3D_xm0ay")
+
+[node name="Platform2" type="MeshInstance3D" parent="."]
+transform = Transform3D(100, 0, 0, 0, 9.81141, 19.3293, 0, -1.93293, 98.1141, 2.43444, -12.0403, 98.7858)
+mesh = SubResource("BoxMesh_ssawp")
+skin = SubResource("Skin_xm0ay")
+surface_material_override/0 = SubResource("StandardMaterial3D_ssawp")
+metadata/_edit_group_ = true
+
+[node name="Platformskelet" type="StaticBody3D" parent="Platform2"]
+
+[node name="Botslaag" type="CollisionShape3D" parent="Platform2/Platformskelet"]
+shape = SubResource("BoxShape3D_xm0ay")
+
+[node name="GameInProgress" parent="." instance=ExtResource("6_p7vk1")]
+transform = Transform3D(-5.9815, 0, -0.470754, 0, 6, 0, 0.470754, 0, -5.9815, 151.026, 12.131, 153.821)
+visible = false
+
+[node name="Sensor" type="Area3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 63.7184, 0, 169.86)
+
+[node name="Botslaag" type="CollisionShape3D" parent="Sensor"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 22.3872, 14.6061, 5.79546)
+shape = SubResource("BoxShape3D_m3kip")
+
+[node name="BeweegbareVoorwerpen" type="Node" parent="."]
+
+[node name="LantaarnpaalBeweegbaar" parent="BeweegbareVoorwerpen" instance=ExtResource("8_x3bib")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -11.2259, -13.6828, 0)
+
+[node name="LantaarnpaalBeweegbaar2" parent="BeweegbareVoorwerpen" instance=ExtResource("8_x3bib")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -11.2259, -13.6828, 43.7157)
+
+[node name="LantaarnpaalBeweegbaar6" parent="BeweegbareVoorwerpen" instance=ExtResource("8_x3bib")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -11.2259, 3.24317, 154.961)
+
+[node name="LantaarnpaalBeweegbaar7" parent="BeweegbareVoorwerpen" instance=ExtResource("8_x3bib")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -11.2259, 3.24317, 188.522)
+
+[node name="LantaarnpaalBeweegbaar8" parent="BeweegbareVoorwerpen" instance=ExtResource("8_x3bib")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 9.89716, 3.24317, 168.884)
+
+[node name="LantaarnpaalBeweegbaar9" parent="BeweegbareVoorwerpen" instance=ExtResource("8_x3bib")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 9.89716, 3.24317, 200.449)
+
+[node name="LantaarnpaalBeweegbaar4" parent="BeweegbareVoorwerpen" instance=ExtResource("8_x3bib")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 10.561, -13.6828, 22.0819)
+
+[node name="LantaarnpaalBeweegbaar5" parent="BeweegbareVoorwerpen" instance=ExtResource("8_x3bib")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 10.561, -13.6828, -23.2692)
+
+[node name="LantaarnpaalBeweegbaar3" parent="BeweegbareVoorwerpen" instance=ExtResource("8_x3bib")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -11.2259, -13.6828, -40.0589)
+
+[node name="BankjeBeweegbaar" parent="BeweegbareVoorwerpen" instance=ExtResource("9_5uyip")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 18.7262, -14.8599, 0)
+
+[node name="PrullenbakBeweegbaar" parent="BeweegbareVoorwerpen" instance=ExtResource("10_3rd0m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.4631, -14.1874, -6.38787)
+
+[node name="LantaarntjeBeweegbaar" parent="BeweegbareVoorwerpen" instance=ExtResource("11_3v7j5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.8693, -14.3542, 7.00068)
+
+[node name="BankjeBeweegbaar2" parent="BeweegbareVoorwerpen" instance=ExtResource("9_5uyip")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 84.715, 3.13771, 191.134)
+
+[node name="PrullenbakBeweegbaar2" parent="BeweegbareVoorwerpen" instance=ExtResource("10_3rd0m")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 78.3271, 3.81017, 192.397)
+
+[node name="LantaarntjeBeweegbaar2" parent="BeweegbareVoorwerpen" instance=ExtResource("11_3v7j5")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 91.7157, 3.64344, 191.991)
+
+[node name="BankjeBeweegbaar3" parent="BeweegbareVoorwerpen" instance=ExtResource("9_5uyip")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 31.7887, 3.13771, 191.134)
+
+[node name="PrullenbakBeweegbaar3" parent="BeweegbareVoorwerpen" instance=ExtResource("10_3rd0m")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 25.4008, 3.81017, 192.397)
+
+[node name="LantaarntjeBeweegbaar3" parent="BeweegbareVoorwerpen" instance=ExtResource("11_3v7j5")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 38.7894, 3.64344, 191.991)
+
+[node name="BankjeBeweegbaar4" parent="BeweegbareVoorwerpen" instance=ExtResource("9_5uyip")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 18.1966, 3.13771, 172.352)
+
+[node name="PrullenbakBeweegbaar4" parent="BeweegbareVoorwerpen" instance=ExtResource("10_3rd0m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.9335, 3.81017, 165.964)
+
+[node name="LantaarntjeBeweegbaar4" parent="BeweegbareVoorwerpen" instance=ExtResource("11_3v7j5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.3397, 3.64344, 179.352)
+
+[node name="UFO" parent="BeweegbareVoorwerpen" instance=ExtResource("11_p7vk1")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 114.543, 5.83957, 203.919)
+
+[node name="StationaireVoorwerpen" type="Node" parent="."]
+
+[node name="Straat" parent="StationaireVoorwerpen" instance=ExtResource("9_x3bib")]
+transform = Transform3D(6.2, 0, 0, 0, 6.2, 0, 0, 0, 6.2, 0, -16.762, -23.688)
+
+[node name="Straat4" parent="StationaireVoorwerpen" instance=ExtResource("9_x3bib")]
+transform = Transform3D(6.2, 0, 0, 0, 6.2, 0, 0, 0, 6.2, 0, -16.762, -72.5023)
+
+[node name="Straat2" parent="StationaireVoorwerpen" instance=ExtResource("9_x3bib")]
+transform = Transform3D(6.2, 0, 0, 0, 6.2, 0, 0, 0, 6.2, 0, -16.762, 25.1164)
+
+[node name="Straat5" parent="StationaireVoorwerpen" instance=ExtResource("9_x3bib")]
+transform = Transform3D(-2.71011e-07, 0, 6.2, 0, 6.2, 0, -6.2, 0, -2.71011e-07, 102.62, 1.40545, 225.507)
+
+[node name="Straat3" parent="StationaireVoorwerpen" instance=ExtResource("9_x3bib")]
+transform = Transform3D(6.2, 0, 0, 0, 6.07979, 1.21497, 0, -1.21497, 6.07979, 0, -12.9934, 70.3411)
+
+[node name="Huis" parent="StationaireVoorwerpen" instance=ExtResource("10_phpkt")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -31.4589, -15.1229, 0)
+
+[node name="Huis3" parent="StationaireVoorwerpen" instance=ExtResource("10_phpkt")]
+transform = Transform3D(-1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, -31.6423, -15.1229, 43.2541)
+
+[node name="Huis6" parent="StationaireVoorwerpen" instance=ExtResource("10_phpkt")]
+transform = Transform3D(-1.67758, 0, -2.48711, 0, 3, 0, 2.48711, 0, -1.67758, 140.373, 2.17677, 230.956)
+
+[node name="Huis2" parent="StationaireVoorwerpen" instance=ExtResource("10_phpkt")]
+transform = Transform3D(-3, 0, -2.62268e-07, 0, 3, 0, 2.62268e-07, 0, -3, -28.8764, -9.80267, 86.3804)
+
+[node name="Weggetje" parent="StationaireVoorwerpen" instance=ExtResource("11_p47ut")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 28.3901, -16.6419, -30.1923)
+
+[node name="Weggetje2" parent="StationaireVoorwerpen" instance=ExtResource("11_p47ut")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 28.3901, -16.6419, 8.62874)
+
+[node name="Weggetje5" parent="StationaireVoorwerpen" instance=ExtResource("11_p47ut")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 28.3901, 1.68359, 167.225)
+
+[node name="Weggetje6" parent="StationaireVoorwerpen" instance=ExtResource("11_p47ut")]
+transform = Transform3D(-2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, 54.1913, 1.6397, 180.757)
+
+[node name="Weggetje7" parent="StationaireVoorwerpen" instance=ExtResource("11_p47ut")]
+transform = Transform3D(-2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, 93.4035, 1.70192, 180.757)
+
+[node name="Weggetje3" parent="StationaireVoorwerpen" instance=ExtResource("11_p47ut")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 28.3901, -16.6419, 47.6528)
+
+[node name="Weggetje4" parent="StationaireVoorwerpen" instance=ExtResource("11_p47ut")]
+transform = Transform3D(5, 0, 0, 0, 4.90867, 0.951304, 0, -0.951304, 4.90867, 28.3901, -15.8258, 55.0059)
+
+[node name="Sneeuwboom" parent="StationaireVoorwerpen" instance=ExtResource("12_iv21f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.6047, -3.83431, 111.304)
+
+[node name="Sneeuwboom4" parent="StationaireVoorwerpen" instance=ExtResource("12_iv21f")]
+transform = Transform3D(1, 0, 0, 0, 0.997564, 0.0697565, 0, -0.0697565, 0.997564, -12.6047, -2.53092, 125.617)
+
+[node name="Sneeuwboom5" parent="StationaireVoorwerpen" instance=ExtResource("12_iv21f")]
+transform = Transform3D(1.095, 0, 0, 0, 1.09233, 0.0763833, 0, -0.0763833, 1.09233, -3.12863, -2.53092, 125.617)
+
+[node name="Sneeuwboom6" parent="StationaireVoorwerpen" instance=ExtResource("12_iv21f")]
+transform = Transform3D(1.215, 0, 0, 0, 1.19869, 0.198399, 0, -0.198399, 1.19869, 9.37842, -2.53092, 124.8)
+
+[node name="Sneeuwboom3" parent="StationaireVoorwerpen" instance=ExtResource("12_iv21f")]
+transform = Transform3D(1.0547, 0.179943, -0.0113142, -0.180176, 1.04943, -0.105556, -0.00665479, 0.105952, 1.06472, -24.3669, -3.83431, 113.17)
+
+[node name="Sneeuwboom2" parent="StationaireVoorwerpen" instance=ExtResource("12_iv21f")]
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 2.0159, -3.83431, 114.403)
+
+[node name="Sneeuwboom9" parent="StationaireVoorwerpen" instance=ExtResource("12_iv21f")]
+transform = Transform3D(1.23722, -0.178265, 0, 0.178265, 1.23722, 0, 0, 0, 1.25, 32.3559, -3.44278, 114.403)
+
+[node name="Sneeuwboom10" parent="StationaireVoorwerpen" instance=ExtResource("12_iv21f")]
+transform = Transform3D(1.23722, -0.178265, 0, 0.178265, 1.23722, 0, 0, 0, 1.25, 44.9076, -16.7518, -40.0998)
+
+[node name="Sneeuwboom17" parent="StationaireVoorwerpen" instance=ExtResource("12_iv21f")]
+transform = Transform3D(1.24968, 0.0281192, 0, -0.0281192, 1.24968, 0, 0, 0, 1.25, 43.0488, -16.7518, 50.8424)
+
+[node name="Sneeuwboom16" parent="StationaireVoorwerpen" instance=ExtResource("12_iv21f")]
+transform = Transform3D(1.23722, -0.178265, 0, 0.178265, 1.23722, 0, 0, 0, 1.25, 45.0762, -16.7518, 19.4399)
+
+[node name="Sneeuwboom11" parent="StationaireVoorwerpen" instance=ExtResource("12_iv21f")]
+transform = Transform3D(1.22571, 0.245232, 0, -0.245232, 1.22571, 0, 0, 0, 1.25, 44.9076, -16.7518, -23.1888)
+
+[node name="Sneeuwboom13" parent="StationaireVoorwerpen" instance=ExtResource("12_iv21f")]
+transform = Transform3D(1.24966, 0.0290353, 0, -0.0290353, 1.24966, 0, 0, 0, 1.25, -30.0692, -16.7518, -40.0998)
+
+[node name="Sneeuwboom14" parent="StationaireVoorwerpen" instance=ExtResource("12_iv21f")]
+transform = Transform3D(1.24875, 0.0558755, 0, -0.0558755, 1.24875, 0, 0, 0, 1.25, -29.3098, -15.8381, -23.1888)
+
+[node name="Sneeuwboom12" parent="StationaireVoorwerpen" instance=ExtResource("12_iv21f")]
+transform = Transform3D(1.24925, -0.0431665, 0, 0.0428712, 1.24071, -0.145968, 0.00504076, 0.145881, 1.24145, 44.9076, -16.7518, -1.78867)
+
+[node name="Sneeuwboom15" parent="StationaireVoorwerpen" instance=ExtResource("12_iv21f")]
+transform = Transform3D(1.18429, -0.0409218, 4.41184e-10, 0.0406419, 1.17619, -0.138378, 0.00477864, 0.138296, 1.17689, 47.5632, 1.32521, 161.469)
+
+[node name="Sneeuwboom18" parent="StationaireVoorwerpen" instance=ExtResource("12_iv21f")]
+transform = Transform3D(0.874478, -0.0302165, -8.37707e-10, 0.0301835, 0.873521, 0.0409283, -0.00141338, -0.0409039, 0.874042, 68.3415, 1.32521, 161.469)
+
+[node name="Sneeuwboom19" parent="StationaireVoorwerpen" instance=ExtResource("12_iv21f")]
+transform = Transform3D(1.19928, -0.0414398, 4.46768e-10, 0.0411563, 1.19108, -0.14013, 0.00483913, 0.140046, 1.19179, 91.9683, 1.32521, 161.469)
+
+[node name="Sneeuwboom20" parent="StationaireVoorwerpen" instance=ExtResource("12_iv21f")]
+transform = Transform3D(1.39854, -0.214308, 0.0195045, 0.215118, 1.38889, -0.164081, 0.00570614, 0.165138, 1.40532, 111.014, 1.32521, 161.469)
+
+[node name="Sneeuwboom8" parent="StationaireVoorwerpen" instance=ExtResource("12_iv21f")]
+transform = Transform3D(1.24663, 0.0916783, 0, -0.0916783, 1.24663, 0, 0, 0, 1.25, -34.4034, -3.83431, 114.403)
+
+[node name="Sneeuwboom7" parent="StationaireVoorwerpen" instance=ExtResource("12_iv21f")]
+transform = Transform3D(1.0471, -0.274701, 0.625, 0.317197, 1.20908, 0, -0.604542, 0.158599, 1.08253, 21.109, -3.83431, 114.403)
+
+[node name="Huis4" parent="StationaireVoorwerpen" instance=ExtResource("16_orkm3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.3913, 2.33033, 217.781)
+
+[node name="Huis5" parent="StationaireVoorwerpen" instance=ExtResource("16_orkm3")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -27.7958, 2.33033, 164.799)
+
+[node name="Bocht_inclusief" parent="StationaireVoorwerpen" instance=ExtResource("17_pon8q")]
+transform = Transform3D(-6.2, 0, -5.42021e-07, 0, 6.2, 0, 5.42021e-07, 0, -6.2, 0, 1.65309, 172.192)
+
+[node name="Muziek" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("18_p7vk1")
+
+[connection signal="body_entered" from="Sensor" to="." method="_sensor_betreden"]
+[connection signal="finished" from="Muziek" to="." method="_indien_muziek_klaar"]

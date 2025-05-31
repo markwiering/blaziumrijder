@@ -1,0 +1,93 @@
+[gd_scene load_steps=16 format=3 uid="uid://d1ifsliytbt84"]
+
+[ext_resource type="Script" uid="uid://kigxnajws4bj" path="res://hotrod.gd" id="1_3iyxb"]
+[ext_resource type="ArrayMesh" uid="uid://g444npc7chc5" path="res://Hotrod/hotrod_Kleurenprofiel.res" id="4_wuyop"]
+[ext_resource type="ArrayMesh" uid="uid://dbdr7nu6lcdc7" path="res://Hotrod/hotrod_Kleurenprofiel_001.res" id="5_uxb0r"]
+[ext_resource type="ArrayMesh" uid="uid://cdc7ytw5hnvv0" path="res://Hotrod/hotrod_Cylinder_009.res" id="6_lq61m"]
+[ext_resource type="ArrayMesh" uid="uid://diybntl767u5s" path="res://Hotrod/hotrod_Cylinder_007.res" id="7_y5st2"]
+[ext_resource type="AudioStream" uid="uid://th5kw1c2oxkl" path="res://Geluiden/AchterklepOpenen.ogg" id="8_c1eru"]
+[ext_resource type="ArrayMesh" uid="uid://ggg03uymiyag" path="res://Hotrod/hotrod_Cylinder_008.res" id="8_fdmsv"]
+[ext_resource type="AudioStream" uid="uid://fbgtodd7a6jo" path="res://Geluiden/AchterklepSluiten.ogg" id="9_t8i6k"]
+[ext_resource type="ArrayMesh" uid="uid://bt85j3j2b6m0k" path="res://Hotrod/hotrod_Cylinder_010.res" id="9_u4m6d"]
+[ext_resource type="Animation" uid="uid://cahlc2w3kif3p" path="res://Hotrod/AchterklepOpenen.res" id="10_i6qnf"]
+[ext_resource type="Animation" uid="uid://ctvhct2sdplku" path="res://Hotrod/AchterklepSluiten.res" id="11_6bw0n"]
+[ext_resource type="Animation" uid="uid://gv4mxxwe28fu" path="res://Hotrod/AchterklepSluiten2.res" id="12_8mu2t"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wuyop"]
+size = Vector3(1.96942, 0.949707, 2.03425)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uxb0r"]
+size = Vector3(1.90511, 6.86108, 1.20837)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g77ed"]
+_data = {
+&"AchterklepOpenen": ExtResource("10_i6qnf"),
+&"AchterklepSluiten": ExtResource("11_6bw0n"),
+&"AchterklepSluiten2": ExtResource("12_8mu2t")
+}
+
+[node name="Hotrod" type="VehicleBody3D"]
+center_of_mass_mode = 1
+can_sleep = false
+script = ExtResource("1_3iyxb")
+
+[node name="Bovenlaag" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0122375, 1.95605, 0.0488822)
+shape = SubResource("BoxShape3D_wuyop")
+
+[node name="Onderlaag" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.034153, 0.756909, -0.0292604)
+shape = SubResource("BoxShape3D_uxb0r")
+
+[node name="AchterklepOpen" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_c1eru")
+
+[node name="AchterklepDicht" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_t8i6k")
+
+[node name="AchterwielLinks" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19888, 0.191594, -1.94272)
+use_as_traction = true
+
+[node name="AchterwielLinks" type="MeshInstance3D" parent="AchterwielLinks"]
+mesh = ExtResource("6_lq61m")
+skeleton = NodePath("")
+
+[node name="AchterwielRechts" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.18966, 0.191594, -1.94272)
+use_as_traction = true
+
+[node name="AchterwielRechts" type="MeshInstance3D" parent="AchterwielRechts"]
+mesh = ExtResource("7_y5st2")
+skeleton = NodePath("")
+
+[node name="VoorwielLinks" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19888, 0.191594, 2.58651)
+use_as_steering = true
+
+[node name="VoorwielLinks" type="MeshInstance3D" parent="VoorwielLinks"]
+mesh = ExtResource("8_fdmsv")
+skeleton = NodePath("")
+
+[node name="VoorwielRechts" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.18966, 0.191594, 2.58651)
+use_as_steering = true
+
+[node name="VoorwielRechts" type="MeshInstance3D" parent="VoorwielRechts"]
+mesh = ExtResource("9_u4m6d")
+skeleton = NodePath("")
+
+[node name="Auto" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.895905, -0.336369)
+mesh = ExtResource("4_wuyop")
+skeleton = NodePath("")
+
+[node name="Achterklep" type="MeshInstance3D" parent="Auto"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00142225, 0.749314, -1.71069)
+mesh = ExtResource("5_uxb0r")
+skeleton = NodePath("")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_g77ed")
+}

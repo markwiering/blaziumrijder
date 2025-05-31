@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dc4vn6ednk82w"]
+
+[ext_resource type="ArrayMesh" uid="uid://c1ekrab78imdv" path="res://Blender/lantaarnpaal.tres" id="1_gxoyt"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5o2j4"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_3kdvh"]
+height = 16.7669
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_gxoyt"]
+height = 5.91187
+radius = 0.402832
+
+[node name="LantaarnpaalBeweegbaar" type="RigidBody3D"]
+mass = 100.0
+physics_material_override = SubResource("PhysicsMaterial_5o2j4")
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, 6, 0)
+can_sleep = false
+
+[node name="Botslaag" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.74547, 0)
+shape = SubResource("CylinderShape3D_3kdvh")
+
+[node name="Model" type="MeshInstance3D" parent="Botslaag"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.42313, 0)
+mesh = ExtResource("1_gxoyt")
+
+[node name="Botslaag2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.0109012, 16.4686, -4.33324)
+shape = SubResource("CylinderShape3D_gxoyt")

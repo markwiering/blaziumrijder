@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://c70mahijwgbvc"]
+
+[ext_resource type="ArrayMesh" uid="uid://cxlbdj86k10cl" path="res://Blender/lantaarntje.tres" id="1_q4s14"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ask5a"]
+height = 5.79308
+radius = 0.299805
+
+[node name="LantaarntjeBeweegbaar" type="RigidBody3D"]
+mass = 100.0
+
+[node name="Botslaag" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.67496, 0)
+shape = SubResource("CylinderShape3D_ask5a")
+
+[node name="Plaatje" type="MeshInstance3D" parent="Botslaag"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.67496, 0)
+mesh = ExtResource("1_q4s14")
+skeleton = NodePath("../..")

@@ -1,0 +1,86 @@
+[gd_scene load_steps=13 format=3 uid="uid://bwhfaupv8m0c4"]
+
+[ext_resource type="Texture2D" uid="uid://b4oaheksqjkii" path="res://Hoofdmenu/HotrodInSiberischBos.jpg" id="1_db5bp"]
+[ext_resource type="Script" uid="uid://d2lna600relmd" path="res://hoofdmenu.gd" id="1_ku3f8"]
+[ext_resource type="Texture2D" uid="uid://du17djd5k2we3" path="res://Hoofdmenu/startknop.png" id="2_d15ax"]
+[ext_resource type="Texture2D" uid="uid://dp6fhb0qc4v38" path="res://Hoofdmenu/startknopINGEDRUKT.png" id="3_0kn0t"]
+[ext_resource type="Texture2D" uid="uid://dt7ui1vgtq1a3" path="res://Hoofdmenu/startknopAANRAKING.png" id="4_l30jx"]
+[ext_resource type="Texture2D" uid="uid://bq38h68dybsdy" path="res://Hoofdmenu/volledigschermKnop.png" id="5_fh1ko"]
+[ext_resource type="Texture2D" uid="uid://buywmi1g6a72w" path="res://Hoofdmenu/volledigschermKnopINGEDRUKT.png" id="6_ku3f8"]
+[ext_resource type="Texture2D" uid="uid://cikrbl06as4jb" path="res://Hoofdmenu/volledigschermKnopAANRAKING.png" id="7_ug6k2"]
+[ext_resource type="Texture2D" uid="uid://c65hwb115dtvc" path="res://Hoofdmenu/afsluitKnop.png" id="9_v2tia"]
+[ext_resource type="Texture2D" uid="uid://dlbjtcuj7j2ra" path="res://Hoofdmenu/afsluitKnopINGEDRUKT.png" id="10_wd53j"]
+[ext_resource type="Texture2D" uid="uid://b8flteam2jv8b" path="res://Hoofdmenu/afsluitKnopAANRAKING.png" id="11_sdng2"]
+[ext_resource type="AudioStream" uid="uid://dukpxu2n5ekdq" path="res://Geluiden/menumuziek.ogg" id="12_wd53j"]
+
+[node name="Hoofdmenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ku3f8")
+
+[node name="HotrodInSiberischBos" type="Sprite2D" parent="."]
+position = Vector2(575.5, 324)
+scale = Vector2(0.959167, 0.796069)
+texture = ExtResource("1_db5bp")
+
+[node name="Knoppenhouder" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 1150.0
+offset_bottom = 265.0
+
+[node name="VerticaleKnoppenhouder" type="VBoxContainer" parent="Knoppenhouder"]
+layout_mode = 2
+alignment = 1
+
+[node name="BevatStarten" type="HBoxContainer" parent="Knoppenhouder/VerticaleKnoppenhouder"]
+layout_mode = 2
+alignment = 1
+
+[node name="Starten" type="TextureButton" parent="Knoppenhouder/VerticaleKnoppenhouder/BevatStarten"]
+layout_mode = 2
+texture_normal = ExtResource("2_d15ax")
+texture_pressed = ExtResource("3_0kn0t")
+texture_hover = ExtResource("4_l30jx")
+
+[node name="BevatVolledigscherm" type="HBoxContainer" parent="Knoppenhouder/VerticaleKnoppenhouder"]
+layout_mode = 2
+alignment = 1
+
+[node name="VolledigScherm" type="TextureButton" parent="Knoppenhouder/VerticaleKnoppenhouder/BevatVolledigscherm"]
+layout_mode = 2
+texture_normal = ExtResource("5_fh1ko")
+texture_pressed = ExtResource("6_ku3f8")
+texture_hover = ExtResource("7_ug6k2")
+
+[node name="LageKnoppenhouder" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 559.0
+offset_top = 510.0
+offset_right = 1153.0
+offset_bottom = 648.0
+
+[node name="VerticaalSorteren" type="VBoxContainer" parent="LageKnoppenhouder"]
+layout_mode = 2
+alignment = 1
+
+[node name="HorizontaalSorteren" type="HBoxContainer" parent="LageKnoppenhouder/VerticaalSorteren"]
+layout_mode = 2
+alignment = 1
+
+[node name="Afsluitknop" type="TextureButton" parent="LageKnoppenhouder/VerticaalSorteren/HorizontaalSorteren"]
+layout_mode = 2
+texture_normal = ExtResource("9_v2tia")
+texture_pressed = ExtResource("10_wd53j")
+texture_hover = ExtResource("11_sdng2")
+
+[node name="Muziek" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_wd53j")
+
+[connection signal="pressed" from="Knoppenhouder/VerticaleKnoppenhouder/BevatStarten/Starten" to="." method="_indien_starten_ingedrukt"]
+[connection signal="pressed" from="Knoppenhouder/VerticaleKnoppenhouder/BevatVolledigscherm/VolledigScherm" to="." method="_indien_volledig_scherm_ingedrukt"]
+[connection signal="pressed" from="LageKnoppenhouder/VerticaalSorteren/HorizontaalSorteren/Afsluitknop" to="." method="_indien_afsluitknop_ingedrukt"]
+[connection signal="finished" from="Muziek" to="." method="_indien_muziek_klaar"]

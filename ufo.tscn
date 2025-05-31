@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3rtqtggc00jf"]
+
+[ext_resource type="ArrayMesh" uid="uid://cfad5qcb1c8f2" path="res://Blender/ufo.tres" id="1_c0rv2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lwnds"]
+size = Vector3(5.87939, 1.87851, 3.20044)
+
+[node name="UFO" type="RigidBody3D"]
+mass = 1000.0
+
+[node name="Botslaag" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.236084, 0.356784, 0.0819092)
+shape = SubResource("BoxShape3D_lwnds")
+
+[node name="Plaatje" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_c0rv2")
+skeleton = NodePath("../Botslaag")

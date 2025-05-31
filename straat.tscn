@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=4 uid="uid://17musnf4fx8c"]
+
+[ext_resource type="Texture2D" uid="uid://dc0vchvgv6soj" path="res://Blender/straat_straat.jpg" id="1_4jr85"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ebp5"]
+resource_name = "Straat"
+cull_mode = 2
+albedo_texture = ExtResource("1_4jr85")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_lt16t"]
+_surfaces = [{
+"aabb": AABB(-1.21022, -0.148592, -3.93341, 2.42044, 0.297184, 7.86682),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAwACAAEAAAAEAAEAAwAFAAIABQAAAAIABgAEAAAABQAGAAAABwABAAQABwADAAEABgAHAAQABQADAAcABQAHAAYA"),
+"name": "Straat",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("////////AAAAAP//AAAAAAAA/////wAAAAAAAAAAAAD/////AAAAAAAAAAD//wAA//8AAP//AAD//wAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_cx170"]
+resource_name = "straat_Cube"
+_surfaces = [{
+"aabb": AABB(-1.21022, -0.148592, -3.93341, 2.42044, 0.297184, 7.86682),
+"attribute_data": PackedByteArray("/v9D3KNcQn/+/0J/o1xD3LzNAAD//2sLvM1rC///AACjXNYW//9BIqNcQSL//9YW/v9Cf6NcQSL//0Eio1xCf6Ncawv//9YWo1zWFv//awt5mwAAvM1rC3mbawu8zQAA"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_2ebp5"),
+"name": "Straat",
+"primitive": 3,
+"uv_scale": Vector4(2.01362, 2.78796, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("////////VNUAAP//AABU1QAA/////1TV/////wAAVNX//wAAAAD//wAA//8AAP///////wAA//8AAAAAAAD//wAAAAAAAP//AAD///////8AAP//AAD//wAAAAD/////AAAAAP//VNX//wAAAABU1f//AAD//1TVAAAAAAAAVNX//wAA//////////8AAP///////////////wAAAAD//wAAAAD///////////////8AAP//////////AAD/////qipU1aoqVNWqKlTVqipU1f9//3//f/9//3//f/9//3//v/9//7//f/+//3//v/9/qqqqqqqqqqqqqqqqqqqqqv8//3//P/9//z//f/8//3////9/////f////3////9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_lt16t")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jpo57"]
+size = Vector3(2.2395, 0.272789, 7.78496)
+
+[node name="Straat" type="MeshInstance3D"]
+mesh = SubResource("ArrayMesh_cx170")
+skeleton = NodePath("")
+metadata/_edit_group_ = true
+
+[node name="Lichaam" type="StaticBody3D" parent="."]
+metadata/_edit_group_ = true
+
+[node name="Botslaag" type="CollisionShape3D" parent="Lichaam"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.024292, 0.00580215, -0.00475311)
+shape = SubResource("BoxShape3D_jpo57")
+metadata/_edit_group_ = true

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://byfuhtkvq4f7t"]
+
+[ext_resource type="ArrayMesh" uid="uid://doantojngmx5p" path="res://Blender/prullenbak.tres" id="1_3qbb3"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_wtjkc"]
+radius = 0.980957
+
+[node name="PrullenbakBeweegbaar" type="RigidBody3D"]
+mass = 10.0
+
+[node name="Botslaag" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_wtjkc")
+
+[node name="Plaatje" type="MeshInstance3D" parent="Botslaag"]
+mesh = ExtResource("1_3qbb3")

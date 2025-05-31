@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwmvleq23q750"]
+
+[ext_resource type="ArrayMesh" uid="uid://josj5wtfti0v" path="res://Blender/bankje_nieuw.tres" id="1_cod82"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7wivc"]
+size = Vector3(2.00293, 2.15602, 5.60767)
+
+[node name="BankjeBeweegbaar" type="RigidBody3D"]
+mass = 100.0
+
+[node name="Botslaag" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.359863, 0.56753, 0.0697021)
+shape = SubResource("BoxShape3D_7wivc")
+
+[node name="Plaatje" type="MeshInstance3D" parent="Botslaag"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.359863, -0.56753, -0.0697021)
+mesh = ExtResource("1_cod82")

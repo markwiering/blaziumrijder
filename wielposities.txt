@@ -1,0 +1,6 @@
+AchterwielLinks ---> 	009
+AchterwielRechts ---> 	007
+VoorwielLinks ---> 		008
+VoorwielRechts ---> 	010
+
+1.199 	0.192 	-1.943
